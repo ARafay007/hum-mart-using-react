@@ -1,5 +1,5 @@
 import React from 'react';
-import HeaderImgGrid from './mainPage/header_ImgGrid';
+import HeaderImgGrid from './mainPage/headerImgGrid';
 import BundleOffer from './mainPage/bundleOffer';
 import Categories from './mainPage/categories';
 

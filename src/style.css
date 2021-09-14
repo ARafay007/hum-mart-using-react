@@ -69,7 +69,12 @@
     letter-spacing: 5px;
   }
   
-  .searchSection_heading > span {
+  .searchSection_heading_Link{
+    color:black;
+    text-decoration: none;
+  }
+
+  .searchSection_heading_Link > span {
     color: rgb(12, 185, 12);
   }
   
@@ -293,12 +298,14 @@
   }
   
   .btnDiv > button{
-    display:inline-block;
+    display:inline;
     background-color: rgb(12, 185, 12);
     color:white;
     border-radius:50px;
-    padding:6px 10px;
+    padding:6px 6px;
     border:0;
+    width:100px;
+    font-size:12px;
     transition: background-color 0.3s;
     text-decoration:none;
   }
@@ -308,6 +315,17 @@
   }
   
   /* =========================== Section-bundleOffer css ends here =========================== */
+
+  .categoryList{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width:1140px;
+    margin:auto;
+    height:auto;
+  }
+
+  /* =========================== Section-category list css ends here =========================== */
   
   .Section-categoris{
     width: 100%;
@@ -344,6 +362,8 @@
     background-color: white;;
     padding:0 10px;
     cursor:pointer;
+    text-decoration: none;
+    color:black;
   }
   
   .category-Img{
@@ -510,7 +530,52 @@
     color:white;
     padding:10px;
   }
+
+  .verification-rightDiv_info{
+    height:auto;
+    transition: height 0.5s;
+  }
+
+  .verification-rightDiv_infoClose,
+  .verification-rightDiv_GPSClose,
+  .addressParaHide{
+    font-size:0px;
+    height:0px;
+  }
   
+  .verification-rightDiv_nameInputClose,
+  .verification-rightDiv_addressInputClose{
+    visibility: hidden;
+  }
+
+  .verification-rightDiv_nameInput{
+    margin:20px 0;
+  }
+
+  .verification-rightDiv_nameInput,
+  .verification-rightDiv_addressInput{
+    width:90%;
+    border:1px solid rgb(207, 205, 205);
+    padding:10px 6px;
+    border-radius:5px;
+    outline:none;
+    transition: all 0.5s;
+  }
+  
+  .verification-rightDiv_GPS{
+    color:blue;
+    border-bottom:1px solid transparent;
+    font-size:18px;
+    margin-bottom:10px;
+    transition: all 0.5s;
+  }
+
+  .verification-rightDiv_GPS:hover{
+    border-bottom:1px solid blue;
+    transition:border-bottom 0.3s;
+    cursor: pointer;
+  }
+
   /* =========================== Section-blank css ends here =========================== */
   
   footer{

@@ -43,7 +43,7 @@ const Head = (props) => {
 
             <header>
                 <div className="searchSection">
-                    <div className="searchSection_heading">Hum<span>Mart</span></div>
+                    <div className="searchSection_heading"><Link to="/" className="searchSection_heading_Link">Hum<span>Mart</span></Link></div>
                     <div className="searchSection_inputs">
                         <input type="text" className='searchSection_search' placeholder="Search entire store here..."
                             value={term} onChange={e => onTextChange(e)} />
@@ -57,9 +57,15 @@ const Head = (props) => {
                 </div>
 
                 <nav className="nav">
-                    <div className="nav-item">BEAUTY & PERSONAL CARE</div>
-                    <div className="nav-item">HOUSEHOLD NEEDS</div>
-                    <div className="nav-item">GROCERY & STAPLES</div>
+                    <div>
+                        <Link to={'/categoryList/Personal Care'} className="nav-item-link">BEAUTY & PERSONAL CARE</Link>
+                    </div>
+                    <div className="nav-item">
+                        <Link to={'/categoryList/Household Needs'} className="nav-item-link">HOUSEHOLD NEEDS</Link>
+                    </div>
+                    <div className="nav-item">
+                        <Link to={'/categoryList/Grocery & Staples'} className="nav-item-link">GROCERY & STAPLES</Link>
+                    </div>
                     <div className="nav-item">FURNISHING & HOME NEEDS</div>
                     <div className="nav-item">BABY KIDS & TOYS</div>
                     <div className="nav-item">PHARMACY</div>

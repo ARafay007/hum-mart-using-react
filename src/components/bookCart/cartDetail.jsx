@@ -4,8 +4,14 @@ const CartDetail = props => {
 
     const [openCloseModel, setOpenCloseModel] = useState('hideModal');
     const [custName, setCustName] = useState('');
-    const [address, setAddress] = useState('');
     const [contact, setContact] = useState('');
+    const [location, setLocation] = useState('');
+
+    const [showDiv, setShowDiv] = useState('verification-rightDiv_infoClose');
+    const [showNameInput, setShowNameInput] = useState('verification-rightDiv_nameInputClose');
+    const [showGPSpara, setShowGPSpara] = useState('verification-rightDiv_GPSClose');
+    const [showAddresInput, setShowAddressInput] = useState('verification-rightDiv_addressInputClose');
+    const [showAddressPara, setShowAddressPara] = useState('addressParaHide');
     // const [customerDetails, setCustomerDetails] = useState({ name: '', address: '', contact: '' });
 
     const toggleModal = toggle => {
@@ -17,11 +23,19 @@ const CartDetail = props => {
             setCustName(e.target.value);
         }
         else if (e.target.dataset.name === "address") {
-            setAddress(e.target.value);
+            setLocation(e.target.value);
         }
         else if (e.target.dataset.name === "contact") {
             setContact(e.target.value);
         }
+    };
+
+    const showPortion = () => {
+        setShowDiv('verification-rightDiv_info');
+        setShowNameInput('verification-rightDiv_nameInput');
+        setShowGPSpara('verification-rightDiv_GPS');
+        setShowAddressInput('verification-rightDiv_addressInput');
+        setShowAddressPara('');
     };
 
     const bookOrder = () => {
@@ -30,15 +44,32 @@ const CartDetail = props => {
         const orderObj = {
             id: ms.getMilliseconds(),
             'name': custName,
-            address,
+            location,
             contact,
             orders
         };
         props.order(orderObj);
     };
 
-    const stopingPropagation = e => {
-        e.stopPropagation();
+    const getLocation = () => {
+        let address = '';
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                fetch(`http://open.mapquestapi.com/geocoding/v1/reverse?key=3gvkIEVDNTU9a025GAqEkA35AupXMiD6&location=${latitude},${longitude}&includeRoadMetadata=true&includeNearestIntersection=true`)
+                    .then(resp => resp.json())
+                    .then(data => {
+                        const { adminArea3, adminArea5, street } = data.results[0].locations[0];
+                        address = `${street} ${adminArea5} ${adminArea3}`;
+                        // console.log(address);
+                        setLocation(address);
+                    });
+            },
+            (onError) => {
+                alert('Please allow this site to get your location.');
+                console.log(onError);
+            });
     };
 
     const myCartHeading = () => {
@@ -88,15 +119,26 @@ const CartDetail = props => {
                                 <span>Phone Number Verification</span>
                                 <p className="numberVerification-rightDiv-p1">We need your phone number so that we can update you about your order.</p>
                                 <p>Your 11 digit mobile number</p>
-                                <input type="text" className="numberVerification_Input" placeholder="03" name="" id="" />
-                                <input type="button" className="numberVerification_btn" value='Next' />
+                                <input type="text" className="numberVerification_Input" placeholder="03" data-name="contact" value={contact} onChange={onTextChange} />
+                                <input type="button" className="numberVerification_btn" value='Next' onClick={showPortion} />
                             </div>
                         </div>
                         <div className="verificationDivs">
                             <div className="verificationDiv-leftDiv">
                                 <span>2</span>
                             </div>
-                            <div className="verification-rightDiv">Delivery Address</div>
+                            <div className="verification-rightDiv">
+                                Delivery Address
+                                <div className={`${showDiv}`}>
+                                    <input type='text' placeholder='First & Last Name' data-name="name" value={custName} onChange={onTextChange} className={`${showNameInput}`} />
+
+                                    <p onClick={getLocation} className={`${showGPSpara}`}>Click here to fill this address using current location</p>
+
+                                    <p className={`${showAddressPara}`}>Address</p>
+
+                                    <input type='text' value={location} data-name="address" onChange={onTextChange} className={`${showAddresInput}`} />
+                                </div>
+                            </div>
                         </div>
                         <div className="verificationDivs">
                             <div className="verificationDiv-leftDiv">
@@ -120,15 +162,15 @@ const CartDetail = props => {
             </section>
 
             <div className={`modal ${openCloseModel}`} onClick={() => toggleModal(false)}>
-                <div className="modal-UserInfo" onClick={stopingPropagation}>
+                <div className="modal-UserInfo" onClick={e => { e.stopPropagation() }}>
                     <div><button className="modal-CloseBtn" onClick={() => toggleModal(false)}>X</button></div>
                     <div className="modal-UserInfo-div">
                         <label>Name</label>
-                        <input type="text" className="nameField" placeholder="Enter your name..." data-name="name" onChange={onTextChange} />
+                        <input type="text" className="nameField" placeholder="Enter your name..." data-name="name" value={custName} onChange={onTextChange} />
                         <label>Address</label>
-                        <input type="text" className="addressField" placeholder="Enter your address..." data-name="address" onChange={onTextChange} />
+                        <input type="text" className="addressField" placeholder="Enter your address..." data-name="address" value={location} onChange={onTextChange} />
                         <label>Contact</label>
-                        <input type="text" className="contactField" placeholder="Enter your contact number..." data-name="contact" onChange={onTextChange} />
+                        <input type="text" className="contactField" placeholder="Enter your contact number..." data-name="contact" value={contact} onChange={onTextChange} />
                     </div>
                     <div>
                         <button className="bookOrder" onClick={bookOrder}>Done</button>

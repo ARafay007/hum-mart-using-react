@@ -1,9 +1,10 @@
-const Categories = () => {
-    const categoriesName = ['Personal Care', 'Home & Kitchen', 'Household Needs', 'Noodles, Sauce and Frozen Foods', 'Grocery & Staples', 'Breakfast & Dairy', 'Furnishing & Home Needs', 'Beverages', 'Baby & Kids', 'Pet Care', 'Pharmacy', 'Home Service', 'Biscuits, Snacks and Chocolates', 'Meat & Seafood'];
+import { Link } from 'react-router-dom';
+import { categoriesName } from "../../Constants";
+
+const CategoriesList = () => {
 
     const returnCategories = () => {
         const categoriesArray = [];
-
         for (let i = 0; i < categoriesName.length / 2; i++) {
             let k = i;
 
@@ -14,30 +15,30 @@ const Categories = () => {
 
             categoriesArray.push(
                 <div className="category-container" key={categoriesName[i]}>
-                    <div className="category-item">
+                    <Link to={`/categoryList/${categoriesName[k]}`} className="category-item">
                         <div className="category-Img">
                             <img src={`Images/category-${k}.jpg`} alt="" />
                         </div>
                         <div className="category-content">
-                            <p>${categoriesName[k]}</p>
+                            <p>{categoriesName[k]}</p>
                             <p></p>
                         </div>
                         <div className="category-icon">
                             <ion-icon name="chevron-forward-outline"></ion-icon>
                         </div>
-                    </div>
-                    <div className="category-item">
+                    </Link>
+                    <Link to={`/categoryList/${categoriesName[k + 1]}`} className="category-item">
                         <div className="category-Img">
                             <img src={`Images/category-${k + 1}.jpg`} alt="" />
                         </div>
                         <div className="category-content">
-                            <p>${categoriesName[k + 1]}</p>
+                            <p>{categoriesName[k + 1]}</p>
                             <p></p>
                         </div>
                         <div className="category-icon">
                             <ion-icon name="chevron-forward-outline"></ion-icon>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             );
         }
@@ -55,4 +56,4 @@ const Categories = () => {
     );
 };
 
-export default Categories;
+export default CategoriesList;

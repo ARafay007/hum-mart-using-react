@@ -1,31 +1,14 @@
-import '../style.css'
-import React, { useState, useEffect } from 'react';
+import './style.css'
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Head from './header';
-import Cart from './cart';
-import MainPage from './mainPage';
-import Footer from './footer';
-import BookingCart from './bookCart/bookingCart';
-import CartDetail from './bookCart/cartDetail';
-
-const bundleNameAry = [{
-    id: 1,
-    name: 'Shahi Zeera',
-    price: 120,
-    bundleName: 'Super Saver Bundle 6',
-    img: 'Images/bundleOffer-1.jpg',
-    qty: 1,
-    remaining: 9
-},
-{
-    id: 2,
-    name: 'Chat Masala',
-    price: 111,
-    bundleName: 'Super Saver Bundle 1',
-    img: 'Images/bundleOffer-2.jpg',
-    qty: 1,
-    remaining: 9
-}];
+import Head from './components/header';
+import Cart from './components/cart';
+import MainPage from './components/mainPage';
+import Footer from './components/footer';
+import BookingCart from './components/bookCart/bookingCart';
+import CartDetail from './components/bookCart/cartDetail';
+import CategoryList from './components/CategoryList';
+import { bundleNameAry } from './Constants';
 
 const App = () => {
     const [cartToggle, setCartToggle] = useState(false);
@@ -34,7 +17,7 @@ const App = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [customerOrders, setCustomerOrders] = useState([]);
 
-    useEffect(() => { console.log(customerOrders); }, [customerOrders]);
+    // useEffect(() => { console.log(Constants.bundleName()); }, []);
 
     //--------open and close cart--------
     const toggleCart = (toggler) => {
@@ -45,7 +28,7 @@ const App = () => {
         setBundleObj(_bundleObj);
     };
 
-    const addIncreaseDecreaseItems = (obj, boolean) => {
+    const addIncreaseDecreaseItems = (obj, increaseOrDecrease) => {
         const cartListHolder = [...cartList];
         let amount = 0;
         let isItemContaine = false;
@@ -53,7 +36,7 @@ const App = () => {
         //--------Increasing and decrasing items quantity.--------
         cartListHolder.forEach(el => {
             if (el.id === obj.id) {
-                if (boolean) {
+                if (increaseOrDecrease) {
                     if (el.qty < 10) {
                         el.qty++;
                         el.remaining--;
@@ -62,7 +45,7 @@ const App = () => {
                         alert('No more stock available.');
                     }
                 }
-                else if (!boolean) {
+                else if (!increaseOrDecrease) {
                     if (el.qty > 1) {
                         el.qty--;
                         el.remaining++;
@@ -137,7 +120,11 @@ const App = () => {
                     <Route path='/bookingCart' render={(props) => <BookingCart {...props} bundleObj={bundleObj}
                         addIncreaseDecreaseItems={addIncreaseDecreaseItems} />} />
 
-                    <Route to='/detailcart' render={(props) => <CartDetail {...props} cartList={cartList} order={order} />} />
+                    <Route path='/detailcart' render={(props) => <CartDetail {...props} cartList={cartList} order={order} />} />
+
+                    <Route path='/categoryList/:id' render={(props) => <CategoryList {...props}
+                        gettingBundleOffer={gettingBundleOffer}
+                        addIncreaseDecreaseItems={addIncreaseDecreaseItems} />} />
                 </Switch>
                 <Footer />
             </Router>
