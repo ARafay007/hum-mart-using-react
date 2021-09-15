@@ -1,7 +1,7 @@
 import React from 'react';
-import HeaderImgGrid from './mainPage/headerImgGrid';
-import BundleOffer from './mainPage/bundleOffer';
-import Categories from './mainPage/categories';
+import HeaderImgGrid from '../components/HeaderImgGrid';
+import BundleOffer from './BundleOffer';
+import Categories from '../components/Categories';
 
 const MainPage = (props) => {
     return (

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { categoriesName } from "../../Constants";
+import { categoriesName } from "../Constants";
 
-const CategoriesList = () => {
+const Categories = () => {
 
     const returnCategories = () => {
         const categoriesArray = [];
@@ -56,4 +56,4 @@ const CategoriesList = () => {
     );
 };
 
-export default CategoriesList;
+export default Categories;

@@ -1,13 +1,13 @@
 import './style.css'
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Head from './components/header';
-import Cart from './components/cart';
-import MainPage from './components/mainPage';
-import Footer from './components/footer';
-import BookingCart from './components/bookCart/bookingCart';
-import CartDetail from './components/bookCart/cartDetail';
-import CategoryList from './components/CategoryList';
+import Head from './container/Header';
+import Cart from './container/Cart';
+import MainPage from './container/MainPage';
+import Footer from './components/Footer';
+import BookingCart from './container/BookingCart';
+import CartDetail from './container/CartDetail';
+import CategoryList from './container/CategoryList';
 import { bundleNameAry } from './Constants';
 
 const App = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { sanitizerCategoryList } from '../Constants';
+import { categoryList } from '../Constants';
+// import { List } from "./List";
 
 const CategoryList = (props) => {
 
@@ -14,8 +15,8 @@ const CategoryList = (props) => {
         props.addIncreaseDecreaseItems(el, true);
     };
 
-    const list = () => {
-        return sanitizerCategoryList.filter(el => el.category === param.id).map(el => {
+    const lists = () => {
+        return categoryList.filter(el => el.category === param.id).map(el => {
             return <div className="offer-item" key={`${el.id}`}>
                 <div className="offer-imgDiv">
                     <Link to={'/bookingCart'} className='offer-imgDiv-link'>
@@ -34,7 +35,7 @@ const CategoryList = (props) => {
 
     return (
         <div className="categoryList">
-            {list()}
+            {lists()}
         </div>
     );
 };

@@ -23,7 +23,7 @@ const bundleNameAry = [{
 const categoriesName = ['Personal Care', 'Home & Kitchen', 'Household Needs', 'Noodles, Sauce and Frozen Foods', 'Grocery & Staples', 'Breakfast & Dairy', 'Furnishing & Home Needs', 'Beverages', 'Baby & Kids', 'Pet Care', 'Pharmacy', 'Home Service', 'Biscuits, Snacks and Chocolates', 'Meat & Seafood'];
 
 
-const sanitizerCategoryList = [
+const categoryList = [
     {
         id: 3,
         name: 'Cool & Cool Ocean Hand Sanitizer',
@@ -434,4 +434,4 @@ const sanitizerCategoryList = [
 ];
 
 
-export { bundleNameAry, categoriesName, sanitizerCategoryList };
+export { bundleNameAry, categoriesName, categoryList };

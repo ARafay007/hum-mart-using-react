@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const CartDetail = props => {
-
+export const Details = props => {
     const [openCloseModel, setOpenCloseModel] = useState('hideModal');
     const [custName, setCustName] = useState('');
     const [contact, setContact] = useState('');
@@ -180,5 +179,3 @@ const CartDetail = props => {
         </React.Fragment>
     );
 };
-
-export default CartDetail;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Offer = (props) => {
+const BundleOffer = (props) => {
     const getbundleOffer = (el) => {
         props.gettingBundleOffer(el);
     };
@@ -31,7 +31,16 @@ const Offer = (props) => {
         );
     };
 
-    return <React.Fragment>{offers()}</React.Fragment>;
-}
+    return (
+        <section className="Section-bundleOffer">
+            <div className="bundleOffer-container">
+                <p>NEW BUNDLE OFFERS</p>
+                <div className="offer-container">
+                    {offers()}
+                </div>
+            </div>
+        </section>
+    );
+};
 
-export default Offer;
+export default BundleOffer;
